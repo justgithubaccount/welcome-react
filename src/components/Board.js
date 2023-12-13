@@ -3,9 +3,10 @@ import { useState } from "react";
 import Square from './Square';
 import calculateWinner from '../utils/calculateWinner';
 
-function Board() {
-  const [xIsNext, setXIsNext] = useState(true);
-  const [squares, setSquares] = useState(Array(9).fill(null));
+// function Board() {
+  // const [xIsNext, setXIsNext] = useState(true);
+  // const [squares, setSquares] = useState(Array(9).fill(null));
+  function Board({ xIsNext, squares, onPlay }) {
 
   function handleClick(i) {
     // Если одно из условий true (1) => в условие значение не null (false (0)), то преждевременно выходим из функции
@@ -22,8 +23,10 @@ function Board() {
       nextSquares[i] = "O";
     }
 
-    setSquares(nextSquares);
-    setXIsNext(!xIsNext);
+    onPlay(nextSquares);
+
+    // setSquares(nextSquares);
+    // setXIsNext(!xIsNext);
   }
 
   const winner = calculateWinner(squares);

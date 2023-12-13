@@ -2,11 +2,11 @@ import React, { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./styles.css";
 
-import Board from "./components/Board";
+import Game from "./components/Game";
 
 const root = createRoot(document.getElementById("root"));
 root.render(
   <StrictMode>
-    <Board />
+    <Game />
   </StrictMode>
 );
