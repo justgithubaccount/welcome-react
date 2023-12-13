@@ -1,23 +1,21 @@
 import { useState } from "react";
 
-function Square({ value, onSquareClick }) {
-  return (
-    <button className="square" onClick={onSquareClick}>
-      {value}
-    </button>
-  );
-}
+import Square from './Square';
+import calculateWinner from '../utils/calculateWinner';
 
-export default function Board() {
+function Board() {
   const [xIsNext, setXIsNext] = useState(true);
   const [squares, setSquares] = useState(Array(9).fill(null));
 
   function handleClick(i) {
+    // Если одно из условий true (1) => в условие значение не null (false (0)), то преждевременно выходим из функции
+    // https://learn.javascript.ru/ifelse#preobrazovanie-k-logicheskomu-tipu
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
 
     const nextSquares = squares.slice();
+
     if (xIsNext) {
       nextSquares[i] = "X";
     } else {
@@ -61,25 +59,4 @@ export default function Board() {
   );
 }
 
-function calculateWinner(squares) {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
-
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
-    }
-  }
-
-  return null;
-}
-    
+export default Board;
